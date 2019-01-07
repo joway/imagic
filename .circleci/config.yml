@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11
+    working_directory: /go/src/github.com/joway/imagic
+    steps:
+      - checkout
+      - run: env GO111MODULE=on go mod download
+      - run: env GO111MODULE=on go mod vendor
+      - run: env GO111MODULE=on go mod verify
+      - run: env GO111MODULE=on go build
+      - run: env GO111MODULE=on go test -v ./...
