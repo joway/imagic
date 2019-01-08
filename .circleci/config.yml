@@ -6,8 +6,24 @@ jobs:
     working_directory: /go/src/github.com/joway/imagic
     steps:
       - checkout
-      - run: env GO111MODULE=on go mod download
-      - run: env GO111MODULE=on go mod vendor
-      - run: env GO111MODULE=on go mod verify
+      - run: sudo apt update && sudo apt install -y gcc
+      - run: ./dep.sh
       - run: env GO111MODULE=on go build
       - run: env GO111MODULE=on go test -v ./...
+  install:
+    docker:
+      - image: circleci/golang:1.11
+    steps:
+      - run: mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run: go get github.com/joway/imagic
+      - run: imagic version
+      - run: imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.png
+      - run: imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.jpg
+      - run: imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.png
+      - run: imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.jpg
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - build
+      - install

@@ -46,17 +46,29 @@ func NewImageFromBuffer(data []byte) (*Image, error) {
 	}, nil
 }
 
-func (i *Image) Compress(ratio float32) (*Image, error) {
-	compressed, err := i.processor.Compress(i.Data, ratio)
+func (i *Image) Compress(quality int) (*Image, error) {
+	precessed, err := i.processor.Compress(i.Data, quality)
 	if err != nil {
 		return nil, err
 	}
 
-	return NewImageFromBuffer(compressed)
+	return NewImageFromBuffer(precessed)
+}
+
+func (i *Image) Resize(width int, height int) (*Image, error) {
+	precessed, err := i.processor.Resize(i.Data, width, height)
+	if err != nil {
+		return nil, err
+	}
+
+	return NewImageFromBuffer(precessed)
 }
 
 func (i *Image) Write(fn string) error {
 	absPath, _ := filepath.Abs(fn)
+	if err := util.EnsureDir(fn); err != nil {
+		return err
+	}
 	return ioutil.WriteFile(absPath, i.Data, os.ModePerm)
 }
 
@@ -75,11 +87,5 @@ func getImageFormat(data []byte) (string, error) {
 	if bytes[0] == 0xFF && bytes[1] == 0xD8 {
 		return constant.FormatJpeg, nil
 	}
-	//if bytes[0] == 0x47 && bytes[1] == 0x49 && bytes[2] == 0x46 && bytes[3] == 0x38 {
-	//	return FormatGif, nil
-	//}
-	//if bytes[0] == 0x42 && bytes[1] == 0x4D {
-	//	return "bmp", nil
-	//}
 	return "", errors.New("Error image format")
 }

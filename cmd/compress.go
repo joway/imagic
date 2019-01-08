@@ -4,66 +4,59 @@ import (
 	"fmt"
 	"github.com/joway/imagic/pkg/image"
 	"github.com/joway/imagic/pkg/util"
-	"log"
-	"os"
 	"path/filepath"
+	"sync"
 
 	"github.com/spf13/cobra"
 )
 
-var radio *float32
-var output *string
-var suffix *string
+var compressParallelCh chan int
+var compressQuality int
 
 func init() {
-	radio = compressCmd.Flags().Float32P("radio", "r", 1.0, "Source directory to read from")
-	output = compressCmd.Flags().StringP("output", "o", "", "Source directory to read from")
-	suffix = compressCmd.Flags().StringP("suffix", "s", "", "Source directory to read from")
+	compressCmd.Flags().IntVarP(&compressQuality, "quality", "q", 70, "Quantization of image compression")
+	compressCmd.Flags().IntVarP(&parallel, "parallel", "p", 4, "Number of concurrent tasks")
+	compressCmd.Flags().StringVarP(&output, "output", "o", "", "Output directory to write precessed images")
+	compressCmd.Flags().StringVarP(&suffix, "suffix", "s", "", "Suffix of precessed image filename")
 
 	rootCmd.AddCommand(compressCmd)
 }
 
 var compressCmd = &cobra.Command{
-	Use:   "compress",
-	Short: "Compress images",
-	Long:  `Compress images`,
-	Args:  cobra.MinimumNArgs(1),
+	Use:  "compress",
+	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		filesPattern := args[0]
-		files, err := filepath.Glob(filesPattern)
-		if err != nil {
-			fmt.Print(err)
-			os.Exit(1)
-		}
+		compressParallelCh = make(chan int, parallel)
+		wg := &sync.WaitGroup{}
 
+		files := getFilesFromPatterns(args)
 		for _, filename := range files {
-			var outputPath string
-			if *output != "" {
-				absOutput, _ := filepath.Abs(*output)
-				outputPath = absOutput
-			} else {
-				outputPath = filepath.Dir(filename)
-			}
-			baseFilename := filepath.Base(filename)
-			dotPos := util.IndexOf(baseFilename, ".", true)
-			if dotPos == -1 {
-				continue
-			}
-			outputFilename := outputPath + "/" + baseFilename[:dotPos] + *suffix + baseFilename[dotPos:]
+			compressParallelCh <- 1
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
 
-			img, err := image.NewImageFromPath(filename)
-			if err != nil {
-				log.Fatal(err)
-			}
-			outImg, err := img.Compress(0.5)
-			if err != nil {
-				log.Fatal(err)
-			}
-			err = outImg.Write(outputFilename)
-			if err != nil {
-				log.Fatal(err)
-			}
-			fmt.Println(outputFilename)
+				outputFileName := getOutputFileName(filename, suffix, output)
+				img, err := image.NewImageFromPath(filename)
+				if err != nil {
+					util.LogError(err)
+					return
+				}
+				outImg, err := img.Compress(compressQuality)
+				if err != nil {
+					util.LogError(err)
+					return
+				}
+				if err := outImg.Write(outputFileName); err != nil {
+					util.LogError(err)
+					return
+				}
+
+				util.LogInfo(fmt.Sprintf("%s compressed", filepath.Base(outputFileName)))
+
+				<-compressParallelCh
+			}()
 		}
+		wg.Wait()
 	},
 }

@@ -1,9 +1,12 @@
 package processor
 
-import "github.com/joway/imagic/pkg/constant"
+import (
+	"github.com/joway/imagic/pkg/constant"
+)
 
 type Engine interface {
-	Compress(input []byte, ratio float32) ([]byte, error)
+	Compress(input []byte, quality int) ([]byte, error)
+	Resize(input []byte, width int, height int) ([]byte, error)
 }
 
 type Processor struct {

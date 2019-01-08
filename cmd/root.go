@@ -1,23 +1,36 @@
 package cmd
 
 import (
-	"fmt"
+	"github.com/joway/imagic/pkg/util"
 	"github.com/spf13/cobra"
-	"os"
 )
+
+var parallel int
+var output string
+var suffix string
+
+func init() {
+	rootCmd.PersistentFlags().IntVarP(&parallel, "parallel", "p", 4, "number of concurrent tasks")
+	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "", "output directory to write precessed images")
+	rootCmd.PersistentFlags().StringVarP(&suffix, "suffix", "s", "", "suffix of precessed image filename")
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "imagic",
-	Short: "Imagic is a fast and easy image tool",
-	Long:  `A Fast and Easy image tool`,
+	Short: "An easy and fast tool to process images.",
+	Long: `
+Imagic is an easy and fast tool to process images.
+
+Created by Joway Wang (https://joway.io).
+Issues on https://github.com/joway/imagic/issues.
+`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Do Stuff Here
+		_ = cmd.Help()
 	},
 }
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		util.LogFatal(err)
 	}
 }

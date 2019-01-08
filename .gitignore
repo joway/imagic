@@ -1,4 +1,7 @@
-testdata/output
+dist
+*.output.*
+*.comp.*
+output
 imagic
 
 # Binaries for programs and plugins

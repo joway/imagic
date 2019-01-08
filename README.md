@@ -1,13 +1,6 @@
 # Imagic
 
-## Purpose
-
-A easy and fast tool to process images.
-
-### Support image format
-
-- png
-- jpeg
+An easy and fast tool to process images.
 
 ## Install
 
@@ -17,15 +10,40 @@ go get github.com/joway/imagic
 
 ## Usage
 
-### compress
+### Supported format
 
-```shell
-imagic compress --ratio 0.7 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/*.png
+- png
+- jpeg
+
+### CLI Options
+
+```
+imagic -h
 ```
 
-### resize
+### Compress
 
 ```shell
-imagic resize --ratio 0.7 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/*.png
-imagic resize --width 320  *.png
+imagic compress -q 70 -p 10 \
+	-s .comp -o ./output \
+	./testdata/**/*.png
 ```
+
+### Resize
+
+```shell
+imagic resize -w 320 -p 10 \
+	-s .comp -o ./output \
+	./testdata/**/*.jpg
+```
+
+## Acknowledgement
+
+- [libimagequant-go](https://github.com/joway/libimagequant-go)
+- [imaging](https://github.com/disintegration/imaging)
+
+
+
+
+
+
