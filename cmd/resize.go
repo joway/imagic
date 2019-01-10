@@ -15,8 +15,14 @@ var resizeWidth int
 var resizeHeight int
 
 func init() {
-	resizeCmd.Flags().IntVarP(&resizeWidth, "width", "w", 1024, "number of concurrent tasks")
-	resizeCmd.Flags().IntVarP(&resizeHeight, "height", "l", 0, "number of concurrent tasks")
+	resizeCmd.Flags().IntVarP(&resizeWidth,
+		"width", "w", 1024,
+		"number of concurrent tasks",
+	)
+	resizeCmd.Flags().IntVarP(&resizeHeight,
+		"height", "l", 0,
+		"number of concurrent tasks",
+	)
 
 	rootCmd.AddCommand(resizeCmd)
 }

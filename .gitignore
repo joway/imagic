@@ -4,6 +4,7 @@ dist
 *.comp.*
 output
 imagic
+coverage.txt
 
 # Binaries for programs and plugins
 *.exe

@@ -10,6 +10,11 @@ jobs:
       - run: ./dep.sh
       - run: mkdir -p ./output
       - run: env GO111MODULE=on go build
+      - run: ./imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.png
+      - run: ./imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.jpg
+      - run: ./imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.png
+      - run: ./imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.jpg
+      - run: ./imagic watermark -t ./testdata/images/texture.png -p 10 -o ./output ./testdata/**/*.jpg
       - run: env GO111MODULE=on go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
       - run: bash <(curl -s https://codecov.io/bash)
   install:
@@ -19,10 +24,6 @@ jobs:
       - run: mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
       - run: go get github.com/joway/imagic
       - run: imagic version
-      - run: imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.png
-      - run: imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.jpg
-      - run: imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.png
-      - run: imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.jpg
 workflows:
   version: 2
   pipeline:

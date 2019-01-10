@@ -5,33 +5,54 @@ import (
 	"testing"
 )
 
-var png, _ = NewImageFromPath("../../testdata/images/png/1.png")
-var jpg, _ = NewImageFromPath("../../testdata/images/jpg/1.jpg")
+var textureImage, _ = NewImageFromPath("../../testdata/images/texture.png")
+var pngImage, _ = NewImageFromPath("../../testdata/images/png/1.png")
+var jpgImage, _ = NewImageFromPath("../../testdata/images/jpg/1.jpg")
 
 func TestImage_Compress(t *testing.T) {
+	assert.NotNil(t, textureImage)
+	assert.NotNil(t, pngImage)
+	assert.NotNil(t, jpgImage)
+
 	// PNG
 	// compress
-	outputPng, err := png.Compress(50)
+	outputImg, err := pngImage.Compress(50)
 	assert.NoError(t, err)
-	assert.True(t, len(outputPng.Data) < len(png.Data))
-	err = outputPng.Write("../../output/1.output.png")
+	err = outputImg.Write("../../output/1.output.png")
 	assert.NoError(t, err)
 	// resize
-	outputPng, err = png.Resize(320, 0)
+	outputImg, err = pngImage.Resize(320, 0)
 	assert.NoError(t, err)
-	err = outputPng.Write("../../output/1.output.png")
+	err = outputImg.Write("../../output/1.output.png")
+	assert.NoError(t, err)
+	// watermark
+	outputImg, err = pngImage.WaterMark(textureImage, "30", "30")
+	assert.NoError(t, err)
+	err = outputImg.Write("../../output/1.output.png")
+	assert.NoError(t, err)
+	outputImg, err = pngImage.WaterMark(textureImage, "+30", "+30")
+	assert.NoError(t, err)
+	err = outputImg.Write("../../output/1.output.png")
+	assert.NoError(t, err)
+	outputImg, err = pngImage.WaterMark(textureImage, "-200", "-100")
+	assert.NoError(t, err)
+	err = outputImg.Write("../../output/1.output.png")
 	assert.NoError(t, err)
 
 	// JPEG
 	// compress
-	outputJpg, err := jpg.Compress(50)
+	outputImg, err = jpgImage.Compress(50)
 	assert.NoError(t, err)
-	assert.True(t, len(outputJpg.Data) < len(jpg.Data))
-	err = outputJpg.Write("../../output/1.output.jpg")
+	err = outputImg.Write("../../output/1.output.jpg")
 	assert.NoError(t, err)
 	// resize
-	outputJpg, err = jpg.Resize(320, 0)
+	outputImg, err = jpgImage.Resize(1000, 0)
 	assert.NoError(t, err)
-	err = outputJpg.Write("../../output/1.output.jpg")
+	err = outputImg.Write("../../output/1.output.jpg")
+	assert.NoError(t, err)
+	// watermark
+	outputImg, err = outputImg.WaterMark(textureImage, "-600", "-100")
+	assert.NoError(t, err)
+	err = outputImg.Write("../../output/1.output.jpg")
 	assert.NoError(t, err)
 }

@@ -2,12 +2,14 @@ package processor
 
 import (
 	"github.com/joway/imagic/pkg/constant"
+	"image"
 )
 
 // Engine is the interface of Processor
 type Engine interface {
-	Compress(input []byte, quality int) ([]byte, error)
-	Resize(input []byte, width int, height int) ([]byte, error)
+	Compress(input image.Image, quality int) (image.Image, error)
+	Resize(input image.Image, width int, height int) (image.Image, error)
+	WaterMark(input image.Image, texture image.Image, x int, y int) (image.Image, error)
 }
 
 // Processor is the abstract struct of processor

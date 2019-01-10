@@ -45,6 +45,14 @@ imagic resize -w 320 -p 10 \
 	./testdata/**/*.jpg
 ```
 
+### Watermark
+
+```shell
+imagic watermark -t ./testdata/images/texture.png \
+	-p 10 -o ./output \
+	./testdata/**/*.jpg
+```
+
 ## Benchmark
 
 [benchmark.md](docs/benchmark.md)
@@ -53,9 +61,6 @@ imagic resize -w 320 -p 10 \
 
 - [libimagequant-go](https://github.com/joway/libimagequant-go)
 - [imaging](https://github.com/disintegration/imaging)
-
-
-
-
+- [mergi](https://github.com/noelyahan/mergi)
 
 

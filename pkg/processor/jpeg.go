@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"bytes"
 	"github.com/disintegration/imaging"
+	"github.com/noelyahan/mergi"
+	"image"
 	"image/jpeg"
 )
 
@@ -13,30 +15,30 @@ type JPEGProcessor struct {
 }
 
 // Compress the images
-func (p *JPEGProcessor) Compress(input []byte, quality int) ([]byte, error) {
+func (p *JPEGProcessor) Compress(input image.Image, quality int) (image.Image, error) {
 	buf := new(bytes.Buffer)
 	output := bufio.NewWriter(buf)
-	img, err := jpeg.Decode(bytes.NewReader(input))
+	if err := jpeg.Encode(output, input, &jpeg.Options{Quality: quality}); err != nil {
+		return nil, err
+	}
+	outputImg, err := jpeg.Decode(buf)
 	if err != nil {
 		return nil, err
 	}
-	err = jpeg.Encode(output, img, &jpeg.Options{Quality: quality})
-	if err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
+	return outputImg, nil
 }
 
 // Resize the images
-func (p *JPEGProcessor) Resize(input []byte, width int, height int) ([]byte, error) {
-	img, err := jpeg.Decode(bytes.NewReader(input))
+func (p *JPEGProcessor) Resize(input image.Image, width int, height int) (image.Image, error) {
+	outputImg := imaging.Resize(input, width, height, imaging.Lanczos)
+	return outputImg, nil
+}
+
+// WaterMark the images
+func (p *JPEGProcessor) WaterMark(input image.Image, texture image.Image, x int, y int) (image.Image, error) {
+	outputImg, err := mergi.Watermark(texture, input, image.Pt(x, y))
 	if err != nil {
 		return nil, err
 	}
-	outputImg := imaging.Resize(img, width, height, imaging.Lanczos)
-	buf := new(bytes.Buffer)
-	if err := jpeg.Encode(buf, outputImg, nil); err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
+	return outputImg, nil
 }
