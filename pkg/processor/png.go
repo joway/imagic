@@ -1,10 +1,10 @@
 package processor
 
 import (
-	"bytes"
 	"github.com/disintegration/imaging"
 	"github.com/joway/libimagequant-go/pngquant"
-	"image/png"
+	"github.com/noelyahan/mergi"
+	"image"
 )
 
 // PNGProcessor is the processor for PNG images
@@ -13,32 +13,25 @@ type PNGProcessor struct {
 }
 
 // Compress the images
-func (p *PNGProcessor) Compress(input []byte, quality int) ([]byte, error) {
-	decoded, err := png.Decode(bytes.NewReader(input))
+func (p *PNGProcessor) Compress(input image.Image, quality int) (image.Image, error) {
+	outputImg, err := pngquant.Compress(input, quality, pngquant.SPEED_FASTEST)
 	if err != nil {
 		return nil, err
 	}
-	outputImg, err := pngquant.Compress(decoded, quality, pngquant.SPEED_FASTEST)
-	if err != nil {
-		return nil, err
-	}
-	buf := new(bytes.Buffer)
-	if err := png.Encode(buf, outputImg); err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
+	return outputImg, nil
 }
 
 // Resize the images
-func (p *PNGProcessor) Resize(input []byte, width int, height int) ([]byte, error) {
-	img, err := png.Decode(bytes.NewReader(input))
+func (p *PNGProcessor) Resize(input image.Image, width int, height int) (image.Image, error) {
+	outputImg := imaging.Resize(input, width, height, imaging.Lanczos)
+	return outputImg, nil
+}
+
+// WaterMark the images
+func (p *PNGProcessor) WaterMark(input image.Image, texture image.Image, x int, y int) (image.Image, error) {
+	outputImg, err := mergi.Watermark(texture, input, image.Pt(x, y))
 	if err != nil {
 		return nil, err
 	}
-	outputImg := imaging.Resize(img, width, height, imaging.Lanczos)
-	buf := new(bytes.Buffer)
-	if err := png.Encode(buf, outputImg); err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
+	return outputImg, nil
 }

@@ -1,10 +1,14 @@
 package image
 
 import (
+	"bytes"
 	"github.com/joway/imagic/pkg/constant"
 	"github.com/joway/imagic/pkg/processor"
 	"github.com/joway/imagic/pkg/util"
 	"github.com/pkg/errors"
+	"image"
+	"image/jpeg"
+	"image/png"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -14,7 +18,7 @@ var supportedFormats = []string{constant.FormatPng, constant.FormatJpeg}
 
 // Image is the internal image struct
 type Image struct {
-	Data      []byte
+	Raw       image.Image
 	Format    string
 	processor processor.Engine
 }
@@ -42,8 +46,28 @@ func NewImageFromBuffer(data []byte) (*Image, error) {
 		return nil, errors.New("Unsupported format")
 	}
 
+	var raw image.Image
+	switch format {
+	case constant.FormatPng:
+		raw, err = png.Decode(bytes.NewReader(data))
+		if err != nil {
+			return nil, err
+		}
+	case constant.FormatJpeg:
+		raw, err = jpeg.Decode(bytes.NewReader(data))
+		if err != nil {
+			return nil, err
+		}
+	default:
+	}
+
+	return NewImage(raw, format)
+}
+
+// NewImageFromBuffer return the image from buffer
+func NewImage(raw image.Image, format string) (*Image, error) {
 	return &Image{
-		Data:      data,
+		Raw:       raw,
 		Format:    format,
 		processor: processor.NewProcessor(format),
 	}, nil
@@ -51,22 +75,30 @@ func NewImageFromBuffer(data []byte) (*Image, error) {
 
 // Compress the image
 func (i *Image) Compress(quality int) (*Image, error) {
-	precessed, err := i.processor.Compress(i.Data, quality)
+	outputImg, err := i.processor.Compress(i.Raw, quality)
 	if err != nil {
 		return nil, err
 	}
-
-	return NewImageFromBuffer(precessed)
+	return NewImage(outputImg, i.Format)
 }
 
 // Resize the image
 func (i *Image) Resize(width int, height int) (*Image, error) {
-	precessed, err := i.processor.Resize(i.Data, width, height)
+	outputImg, err := i.processor.Resize(i.Raw, width, height)
+	if err != nil {
+		return nil, err
+	}
+	return NewImage(outputImg, i.Format)
+}
+
+// Resize the image
+func (i *Image) WaterMark(texture *Image, x int, y int) (*Image, error) {
+	outputImg, err := i.processor.WaterMark(i.Raw, texture.Raw, x, y)
 	if err != nil {
 		return nil, err
 	}
 
-	return NewImageFromBuffer(precessed)
+	return NewImage(outputImg, i.Format)
 }
 
 // Write the image into filename
@@ -75,12 +107,24 @@ func (i *Image) Write(fn string) error {
 	if err := util.EnsureDir(fn); err != nil {
 		return err
 	}
-	return ioutil.WriteFile(absPath, i.Data, os.ModePerm)
-}
 
-// Size return the image size
-func (i *Image) Size() int {
-	return len(i.Data)
+	outputFile, err := os.Create(absPath)
+	if err != nil {
+		return err
+	}
+	switch i.Format {
+	case constant.FormatPng:
+		if err := png.Encode(outputFile, i.Raw); err != nil {
+			return err
+		}
+	case constant.FormatJpeg:
+		if err := jpeg.Encode(outputFile, i.Raw, nil); err != nil {
+			return err
+		}
+	default:
+	}
+
+	return outputFile.Close()
 }
 
 func getImageFormat(data []byte) (string, error) {
