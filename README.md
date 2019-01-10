@@ -48,10 +48,13 @@ imagic resize -w 320 -p 10 \
 ### Watermark
 
 ```shell
-imagic watermark -t ./testdata/images/texture.png \
+imagic watermark -x -600 -y -100 \
+	-t ./testdata/images/texture.png \
 	-p 10 -o ./output \
 	./testdata/**/*.jpg
 ```
+
+![watermark](watermark.png)
 
 ## Benchmark
 
