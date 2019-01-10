@@ -11,8 +11,8 @@ import (
 
 var watermarkParallelCh chan int
 var watermarkTextureFn string
-var watermarkX int
-var watermarkY int
+var watermarkXStr string
+var watermarkYStr string
 
 func init() {
 	watermarkCmd.Flags().StringVarP(
@@ -20,14 +20,14 @@ func init() {
 		"t", "",
 		"texture filename",
 	)
-	watermarkCmd.Flags().IntVarP(
-		&watermarkX, "X",
-		"x", 0,
+	watermarkCmd.Flags().StringVarP(
+		&watermarkXStr, "X",
+		"x", "+0",
 		"pos X",
 	)
-	watermarkCmd.Flags().IntVarP(
-		&watermarkY, "Y",
-		"y", 0,
+	watermarkCmd.Flags().StringVarP(
+		&watermarkYStr, "Y",
+		"y", "+0",
 		"pos Y",
 	)
 
@@ -59,7 +59,7 @@ var watermarkCmd = &cobra.Command{
 			go func() {
 				defer wg.Done()
 
-				outImg, err := img.WaterMark(texture, watermarkX, watermarkY)
+				outImg, err := img.WaterMark(texture, watermarkXStr, watermarkYStr)
 				if err != nil {
 					util.LogError(err)
 					return

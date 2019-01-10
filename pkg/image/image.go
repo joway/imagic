@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 var supportedFormats = []string{constant.FormatPng, constant.FormatJpeg}
@@ -91,9 +92,18 @@ func (i *Image) Resize(width int, height int) (*Image, error) {
 	return NewImage(outputImg, i.Format)
 }
 
-// Resize the image
-func (i *Image) WaterMark(texture *Image, x int, y int) (*Image, error) {
-	outputImg, err := i.processor.WaterMark(i.Raw, texture.Raw, x, y)
+// WaterMark the image
+func (i *Image) WaterMark(texture *Image, x string, y string) (*Image, error) {
+	watermarkX, err := parseXY(i.Raw.Bounds().Max.X, x)
+	if err != nil {
+		return nil, err
+	}
+	watermarkY, err := parseXY(i.Raw.Bounds().Max.Y, y)
+	if err != nil {
+		return nil, err
+	}
+
+	outputImg, err := i.processor.WaterMark(i.Raw, texture.Raw, watermarkX, watermarkY)
 	if err != nil {
 		return nil, err
 	}
@@ -139,4 +149,24 @@ func getImageFormat(data []byte) (string, error) {
 		return constant.FormatJpeg, nil
 	}
 	return "", errors.New("Error image format")
+}
+
+
+func parseXY(max int, v string) (int, error) {
+	if len(v) == 0 {
+		return 0, nil
+	} else {
+		flag := v[0]
+		if flag == '+' {
+			return strconv.Atoi(v[1:])
+		} else if flag == '-' {
+			n, err := strconv.Atoi(v[1:])
+			if err != nil {
+				return n, err
+			}
+			return max - n, nil
+		} else {
+			return strconv.Atoi(v)
+		}
+	}
 }

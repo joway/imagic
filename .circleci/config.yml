@@ -23,6 +23,7 @@ jobs:
       - run: imagic compress --quality 70 --parallel 10 --suffix .comp --output ./testdata/output ./testdata/images/**/*.jpg
       - run: imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.png
       - run: imagic resize --width 320 --parallel 10 --suffix .res --output ./testdata/output ./testdata/images/**/*.jpg
+      - run: imagic watermark -t ./testdata/images/texture.png -p 10 -o ./output ./testdata/**/*.jpg
 workflows:
   version: 2
   pipeline:
