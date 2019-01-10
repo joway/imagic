@@ -26,6 +26,8 @@ github.com/spf13/cobra
 github.com/spf13/pflag
 # github.com/stretchr/testify v1.3.0
 github.com/stretchr/testify/assert
+# github.com/thoas/go-funk v0.0.0-20181020164546-fbae87fb5b5c
+github.com/thoas/go-funk
 # golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b
 golang.org/x/image/bmp
 golang.org/x/image/tiff

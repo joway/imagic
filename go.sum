@@ -35,6 +35,8 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0Q=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
+github.com/thoas/go-funk v0.0.0-20181020164546-fbae87fb5b5c h1:3sFKuGerP3mGyXo7gDR1dGQ6GdIrI8s5KWmct0R5J6A=
+github.com/thoas/go-funk v0.0.0-20181020164546-fbae87fb5b5c/go.mod h1:mlR+dHGb+4YgXkf13rkQTuzrneeHANxOm6+ZnEV9HsA=
 golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b h1:VHyIDlv3XkfCa5/a81uzaoDkHH4rr81Z62g+xlnO8uM=
 golang.org/x/image v0.0.0-20181116024801-cd38e8056d9b/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=
 golang.org/x/sys v0.0.0-20190109145017-48ac38b7c8cb h1:1w588/yEchbPNpa9sEvOcMZYbWHedwJjg4VOAdDHWHk=

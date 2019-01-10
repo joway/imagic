@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/joway/imagic/pkg/util"
+	"github.com/thoas/go-funk"
 	"path/filepath"
 )
 
@@ -31,7 +32,7 @@ func getOutputFileName(filename string, suffix string, outputDir string) string 
 		outputPath = filepath.Dir(filename)
 	}
 	baseFilename := filepath.Base(filename)
-	dotPos := util.IndexOf(baseFilename, ".", true)
+	dotPos := funk.LastIndexOf(baseFilename, ".")
 	if dotPos == -1 {
 		return outputPath + "/" + baseFilename + suffix + baseFilename
 	}

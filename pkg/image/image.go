@@ -6,6 +6,7 @@ import (
 	"github.com/joway/imagic/pkg/processor"
 	"github.com/joway/imagic/pkg/util"
 	"github.com/pkg/errors"
+	"github.com/thoas/go-funk"
 	"image"
 	"image/jpeg"
 	"image/png"
@@ -43,7 +44,7 @@ func NewImageFromBuffer(data []byte) (*Image, error) {
 	if err != nil {
 		return nil, err
 	}
-	if !util.Contains(supportedFormats, format) {
+	if !funk.Contains(supportedFormats, format) {
 		return nil, errors.New("Unsupported format")
 	}
 
