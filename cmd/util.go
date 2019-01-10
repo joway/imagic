@@ -29,12 +29,13 @@ func getOutputFileName(filename string, suffix string, outputDir string) string 
 		absOutput, _ := filepath.Abs(outputDir)
 		outputPath = absOutput
 	} else {
-		outputPath = filepath.Dir(filename)
+		absOutput, _ := filepath.Abs(filepath.Dir(filename))
+		outputPath = absOutput
 	}
 	baseFilename := filepath.Base(filename)
 	dotPos := funk.LastIndexOf(baseFilename, ".")
 	if dotPos == -1 {
-		return outputPath + "/" + baseFilename + suffix + baseFilename
+		return outputPath + "/" + baseFilename + suffix
 	}
 	return outputPath + "/" + baseFilename[:dotPos] + suffix + baseFilename[dotPos:]
 }
