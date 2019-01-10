@@ -65,7 +65,7 @@ benchmark png 6 70 $IMAGE_DIR
 benchmark png 15 70 $IMAGE_DIR
 benchmark png 30 70 $IMAGE_DIR
 
-document "##### Quality\n"
+document "\n\n##### Quality\n"
 benchmark png 30 90 $IMAGE_DIR
 benchmark png 30 70 $IMAGE_DIR
 benchmark png 30 30 $IMAGE_DIR

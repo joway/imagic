@@ -17,16 +17,16 @@ MacBook Pro (13-inch, 2016)
 
 ##### Parallel
 
-- parallel=6,quality=70: 9940 ms
-- parallel=15,quality=70: 11480 ms
-- parallel=30,quality=70: 9770 ms
+- parallel=6,quality=70: 21210 ms
+- parallel=15,quality=70: 19450 ms
+- parallel=30,quality=70: 19660 ms
 
 
 ##### Quality
 
-- parallel=30,quality=90: 11650 ms
-- parallel=30,quality=70: 22690 ms
-- parallel=30,quality=30: 23110 ms
+- parallel=30,quality=90: 20890 ms
+- parallel=30,quality=70: 25180 ms
+- parallel=30,quality=30: 24310 ms
 
 
 ### PNG
@@ -40,11 +40,13 @@ MacBook Pro (13-inch, 2016)
 
 ##### Parallel
 
-- parallel=6,quality=70: 5890 ms
-- parallel=15,quality=70: 7690 ms
-- parallel=30,quality=70: 6940 ms
+- parallel=6,quality=70: 6590 ms
+- parallel=15,quality=70: 6750 ms
+- parallel=30,quality=70: 6430 ms
+
+
 ##### Quality
 
-- parallel=30,quality=90: 6650 ms
-- parallel=30,quality=70: 6070 ms
-- parallel=30,quality=30: 5260 ms
+- parallel=30,quality=90: 6850 ms
+- parallel=30,quality=70: 7060 ms
+- parallel=30,quality=30: 7220 ms
