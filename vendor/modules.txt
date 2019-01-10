@@ -12,6 +12,10 @@ github.com/joway/libimagequant-go/pngquant
 github.com/mattn/go-colorable
 # github.com/mattn/go-isatty v0.0.4
 github.com/mattn/go-isatty
+# github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
+github.com/nfnt/resize
+# github.com/noelyahan/mergi v0.0.0-20190108112323-1122b7e5acfe
+github.com/noelyahan/mergi
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
