@@ -66,7 +66,7 @@ func NewImageFromBuffer(data []byte) (*Image, error) {
 	return NewImage(raw, format)
 }
 
-// NewImageFromBuffer return the image from buffer
+// NewImage return the image from buffer
 func NewImage(raw image.Image, format string) (*Image, error) {
 	return &Image{
 		Raw:       raw,
@@ -155,18 +155,18 @@ func getImageFormat(data []byte) (string, error) {
 func parseXY(max int, v string) (int, error) {
 	if len(v) == 0 {
 		return 0, nil
-	} else {
-		flag := v[0]
-		if flag == '+' {
-			return strconv.Atoi(v[1:])
-		} else if flag == '-' {
-			n, err := strconv.Atoi(v[1:])
-			if err != nil {
-				return n, err
-			}
-			return max - n, nil
-		} else {
-			return strconv.Atoi(v)
+	}
+
+	flag := v[0]
+	if flag == '+' {
+		return strconv.Atoi(v[1:])
+	} else if flag == '-' {
+		n, err := strconv.Atoi(v[1:])
+		if err != nil {
+			return n, err
 		}
+		return max - n, nil
+	} else {
+		return strconv.Atoi(v)
 	}
 }
