@@ -61,9 +61,6 @@ imagic watermark -t ./testdata/images/texture.png \
 
 - [libimagequant-go](https://github.com/joway/libimagequant-go)
 - [imaging](https://github.com/disintegration/imaging)
-
-
-
-
+- [mergi](https://github.com/noelyahan/mergi)
 
 
