@@ -3,7 +3,7 @@
 <img width="128px" src="logo.png" alt="logo">
 
 ![GitHub release](https://img.shields.io/github/tag/joway/imagic.svg?label=release)
-![Travis Build](https://travis-ci.org/joway/imagic.svg?branch=master)
+[![Travis Build](https://travis-ci.org/joway/imagic.svg?branch=master)](https://travis-ci.org/joway/imagic)
 [![Go Report Card](https://goreportcard.com/badge/github.com/joway/imagic)](https://goreportcard.com/report/github.com/joway/imagic)
 [![codecov](https://codecov.io/gh/joway/imagic/branch/master/graph/badge.svg)](https://codecov.io/gh/joway/imagic)
 [![CircleCI](https://circleci.com/gh/joway/imagic.svg?style=shield)](https://circleci.com/gh/joway/imagic)
