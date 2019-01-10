@@ -152,7 +152,6 @@ func getImageFormat(data []byte) (string, error) {
 	return "", errors.New("Error image format")
 }
 
-
 func parseXY(max int, v string) (int, error) {
 	if len(v) == 0 {
 		return 0, nil
