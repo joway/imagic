@@ -1,6 +1,9 @@
 # Imagic
 
+![GitHub release](https://img.shields.io/github/tag/joway/imagic.svg?label=release)
 [![Go Report Card](https://goreportcard.com/badge/github.com/joway/imagic)](https://goreportcard.com/report/github.com/joway/imagic)
+[![codecov](https://codecov.io/gh/joway/imagic/branch/master/graph/badge.svg)](https://codecov.io/gh/joway/imagic)
+[![CircleCI](https://circleci.com/gh/joway/imagic.svg?style=shield)](https://circleci.com/gh/joway/imagic)
 
 An easy and fast tool to process images.
 
