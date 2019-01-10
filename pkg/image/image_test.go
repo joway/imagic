@@ -73,3 +73,14 @@ func TestNewImageFromPath(t *testing.T) {
 	nilImage, _ := NewImageFromPath("xxx.png")
 	assert.Nil(t, nilImage)
 }
+
+func Test_parseXY(t *testing.T) {
+	x, _ := parseXY(1000, "+100")
+	assert.Equal(t, 100, x)
+
+	x, _ = parseXY(1000, "-100")
+	assert.Equal(t, 900, x)
+
+	x, _ = parseXY(1000, "100")
+	assert.Equal(t, 100, x)
+}
