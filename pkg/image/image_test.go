@@ -1,7 +1,6 @@
 package image
 
 import (
-	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -12,8 +11,6 @@ var jpg, _ = NewImageFromPath("../../testdata/images/jpg/1.jpg")
 func TestImage_Compress(t *testing.T) {
 	outputPng, err := png.Compress(50)
 	assert.NoError(t, err)
-	fmt.Println(len(outputPng.Data))
-	fmt.Println(len(png.Data))
 	assert.True(t, len(outputPng.Data) < len(png.Data))
 	err = outputPng.Write("../../testdata/images/png/1.output.png")
 	assert.NoError(t, err)

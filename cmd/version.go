@@ -2,19 +2,18 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 )
+
+var IMAGIC_VERSION = "v0.1.0"
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
 }
 
 var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Version number of imagic",
-	Long:  `Version number of imagic`,
+	Use: "version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Imagic v0.0.1")
+		fmt.Printf("Imagic %s\n", IMAGIC_VERSION)
 	},
 }
