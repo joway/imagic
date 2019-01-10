@@ -16,7 +16,7 @@ func (p *PNGProcessor) Compress(input []byte, quality int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	outputImg, err := pngquant.Compress(decoded, quality, pngquant.SPEED_DEFAULT)
+	outputImg, err := pngquant.Compress(decoded, quality, pngquant.SPEED_FASTEST)
 	if err != nil {
 		return nil, err
 	}

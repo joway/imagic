@@ -32,16 +32,16 @@ var resizeCmd = &cobra.Command{
 		for _, filename := range files {
 			resizeParallelCh <- 1
 			wg.Add(1)
-
+			outputFileName := getOutputFileName(filename, suffix, output)
+			img, err := image.NewImageFromPath(filename)
+			if err != nil {
+				util.LogError(err)
+				return
+			}
+			
 			go func() {
 				defer wg.Done()
 
-				outputFileName := getOutputFileName(filename, suffix, output)
-				img, err := image.NewImageFromPath(filename)
-				if err != nil {
-					util.LogError(err)
-					return
-				}
 				outImg, err := img.Resize(resizeWidth, resizeHeight)
 				if err != nil {
 					util.LogError(err)

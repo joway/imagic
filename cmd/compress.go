@@ -33,15 +33,16 @@ var compressCmd = &cobra.Command{
 		for _, filename := range files {
 			compressParallelCh <- 1
 			wg.Add(1)
+
+			outputFileName := getOutputFileName(filename, suffix, output)
+			img, err := image.NewImageFromPath(filename)
+			if err != nil {
+				util.LogError(err)
+				return
+			}
 			go func() {
 				defer wg.Done()
 
-				outputFileName := getOutputFileName(filename, suffix, output)
-				img, err := image.NewImageFromPath(filename)
-				if err != nil {
-					util.LogError(err)
-					return
-				}
 				outImg, err := img.Compress(compressQuality)
 				if err != nil {
 					util.LogError(err)
