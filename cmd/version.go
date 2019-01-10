@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var IMAGIC_VERSION = "v0.1.0"
+var IMAGIC_VERSION = "v0.1.1"
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
