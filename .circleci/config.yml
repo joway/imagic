@@ -8,6 +8,7 @@ jobs:
       - checkout
       - run: sudo apt update && sudo apt install -y gcc
       - run: ./dep.sh
+      - run: mkdir -p ./output
       - run: env GO111MODULE=on go build
       - run: env GO111MODULE=on go test -v ./...
   install:

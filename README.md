@@ -37,6 +37,10 @@ imagic resize -w 320 -p 10 \
 	./testdata/**/*.jpg
 ```
 
+## Benchmark
+
+[benchmark.md](docs/benchmark.md)
+
 ## Acknowledgement
 
 - [libimagequant-go](https://github.com/joway/libimagequant-go)
