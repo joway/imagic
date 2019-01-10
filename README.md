@@ -1,5 +1,7 @@
 # Imagic
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/joway/imagic)](https://goreportcard.com/report/github.com/joway/imagic)
+
 An easy and fast tool to process images.
 
 ## Install

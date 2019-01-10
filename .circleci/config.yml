@@ -10,7 +10,8 @@ jobs:
       - run: ./dep.sh
       - run: mkdir -p ./output
       - run: env GO111MODULE=on go build
-      - run: env GO111MODULE=on go test -v ./...
+      - run: env GO111MODULE=on go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
+      - run: bash <(curl -s https://codecov.io/bash)
   install:
     docker:
       - image: circleci/golang:1.11
