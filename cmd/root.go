@@ -29,6 +29,7 @@ Issues on https://github.com/joway/imagic/issues.
 	},
 }
 
+// Execute root cmd
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		util.LogFatal(err)
