@@ -16,17 +16,36 @@ func TestImage_Compress(t *testing.T) {
 
 	// PNG
 	// compress
-	outputImg, err := pngImage.Compress(50)
+	outputImg, err := pngImage.Compress(70)
 	assert.NoError(t, err)
 	err = outputImg.Write("../../output/1.output.png")
 	assert.NoError(t, err)
-	// resize
-	outputImg, err = pngImage.Resize(320, 0)
+
+	// JPEG
+	// compress
+	outputImg, err = jpgImage.Compress(70)
+	assert.NoError(t, err)
+	err = outputImg.Write("../../output/1.output.jpg")
+	assert.NoError(t, err)
+}
+
+func TestImage_Resize(t *testing.T) {
+	// resize png
+	outputImg, err := pngImage.Resize(320, 0)
 	assert.NoError(t, err)
 	err = outputImg.Write("../../output/1.output.png")
 	assert.NoError(t, err)
-	// watermark
-	outputImg, err = pngImage.WaterMark(textureImage, "30", "30")
+
+	// resize jpeg
+	outputImg, err = jpgImage.Resize(1000, 0)
+	assert.NoError(t, err)
+	err = outputImg.Write("../../output/1.output.jpg")
+	assert.NoError(t, err)
+}
+
+func TestImage_WaterMark(t *testing.T) {
+	// watermark png
+	outputImg, err := pngImage.WaterMark(textureImage, "30", "30")
 	assert.NoError(t, err)
 	err = outputImg.Write("../../output/1.output.png")
 	assert.NoError(t, err)
@@ -39,20 +58,18 @@ func TestImage_Compress(t *testing.T) {
 	err = outputImg.Write("../../output/1.output.png")
 	assert.NoError(t, err)
 
-	// JPEG
-	// compress
-	outputImg, err = jpgImage.Compress(50)
-	assert.NoError(t, err)
-	err = outputImg.Write("../../output/1.output.jpg")
-	assert.NoError(t, err)
-	// resize
+	// watermark jpeg (center-bottom)
 	outputImg, err = jpgImage.Resize(1000, 0)
 	assert.NoError(t, err)
 	err = outputImg.Write("../../output/1.output.jpg")
 	assert.NoError(t, err)
-	// watermark
 	outputImg, err = outputImg.WaterMark(textureImage, "-600", "-100")
 	assert.NoError(t, err)
 	err = outputImg.Write("../../output/1.output.jpg")
 	assert.NoError(t, err)
+}
+
+func TestNewImageFromPath(t *testing.T) {
+	nilImage, _ := NewImageFromPath("xxx.png")
+	assert.Nil(t, nilImage)
 }
