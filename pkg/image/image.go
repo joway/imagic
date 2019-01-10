@@ -10,14 +10,16 @@ import (
 	"path/filepath"
 )
 
-var SUPPORTED_FORMATS = []string{constant.FormatPng, constant.FormatJpeg}
+var supportedFormats = []string{constant.FormatPng, constant.FormatJpeg}
 
+// Image is the internal image struct
 type Image struct {
 	Data      []byte
 	Format    string
 	processor processor.Engine
 }
 
+// NewImageFromPath return the image from path
 func NewImageFromPath(path string) (*Image, error) {
 	// read data
 	absPath, _ := filepath.Abs(path)
@@ -29,13 +31,14 @@ func NewImageFromPath(path string) (*Image, error) {
 	return NewImageFromBuffer(data)
 }
 
+// NewImageFromBuffer return the image from buffer
 func NewImageFromBuffer(data []byte) (*Image, error) {
 	// get format
 	format, err := getImageFormat(data)
 	if err != nil {
 		return nil, err
 	}
-	if !util.Contains(SUPPORTED_FORMATS, format) {
+	if !util.Contains(supportedFormats, format) {
 		return nil, errors.New("Unsupported format")
 	}
 
@@ -46,6 +49,7 @@ func NewImageFromBuffer(data []byte) (*Image, error) {
 	}, nil
 }
 
+// Compress the image
 func (i *Image) Compress(quality int) (*Image, error) {
 	precessed, err := i.processor.Compress(i.Data, quality)
 	if err != nil {
@@ -55,6 +59,7 @@ func (i *Image) Compress(quality int) (*Image, error) {
 	return NewImageFromBuffer(precessed)
 }
 
+// Resize the image
 func (i *Image) Resize(width int, height int) (*Image, error) {
 	precessed, err := i.processor.Resize(i.Data, width, height)
 	if err != nil {
@@ -64,6 +69,7 @@ func (i *Image) Resize(width int, height int) (*Image, error) {
 	return NewImageFromBuffer(precessed)
 }
 
+// Write the image into filename
 func (i *Image) Write(fn string) error {
 	absPath, _ := filepath.Abs(fn)
 	if err := util.EnsureDir(fn); err != nil {
@@ -72,6 +78,7 @@ func (i *Image) Write(fn string) error {
 	return ioutil.WriteFile(absPath, i.Data, os.ModePerm)
 }
 
+// Size return the image size
 func (i *Image) Size() int {
 	return len(i.Data)
 }

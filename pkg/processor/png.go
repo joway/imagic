@@ -7,10 +7,12 @@ import (
 	"image/png"
 )
 
+// PNGProcessor is the processor for PNG images
 type PNGProcessor struct {
 	Processor
 }
 
+// Compress the images
 func (p *PNGProcessor) Compress(input []byte, quality int) ([]byte, error) {
 	decoded, err := png.Decode(bytes.NewReader(input))
 	if err != nil {
@@ -27,6 +29,7 @@ func (p *PNGProcessor) Compress(input []byte, quality int) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// Resize the images
 func (p *PNGProcessor) Resize(input []byte, width int, height int) ([]byte, error) {
 	img, err := png.Decode(bytes.NewReader(input))
 	if err != nil {

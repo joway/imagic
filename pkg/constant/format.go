@@ -1,5 +1,6 @@
 package constant
 
-
-var FormatJpeg string = "jpeg"
-var FormatPng string = "png"
+// FormatJpeg is the format string for jpeg
+var FormatJpeg = "jpeg"
+// FormatPng is the format string for png
+var FormatPng = "png"

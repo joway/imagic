@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Contains check if element in target
 func Contains(in interface{}, elem interface{}) bool {
 	inValue := reflect.ValueOf(in)
 	elemValue := reflect.ValueOf(elem)

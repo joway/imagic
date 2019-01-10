@@ -38,7 +38,7 @@ var resizeCmd = &cobra.Command{
 				util.LogError(err)
 				return
 			}
-			
+
 			go func() {
 				defer wg.Done()
 

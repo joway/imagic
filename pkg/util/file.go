@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 )
 
+// EnsureDir ensure dir is existed
 func EnsureDir(fn string) error {
 	dirName := filepath.Dir(fn)
 	if _, err := os.Stat(dirName); err != nil {

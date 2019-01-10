@@ -7,10 +7,12 @@ import (
 	"image/jpeg"
 )
 
+// JPEGProcessor is the processor for JPEG images
 type JPEGProcessor struct {
 	Processor
 }
 
+// Compress the images
 func (p *JPEGProcessor) Compress(input []byte, quality int) ([]byte, error) {
 	buf := new(bytes.Buffer)
 	output := bufio.NewWriter(buf)
@@ -25,6 +27,7 @@ func (p *JPEGProcessor) Compress(input []byte, quality int) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// Resize the images
 func (p *JPEGProcessor) Resize(input []byte, width int, height int) ([]byte, error) {
 	img, err := jpeg.Decode(bytes.NewReader(input))
 	if err != nil {

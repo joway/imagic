@@ -1,5 +1,6 @@
 package util
 
+// IndexOf get the index of elem in target
 func IndexOf(target string, elem string, reverse bool) int {
 	length := len(target)
 	for index := range target {

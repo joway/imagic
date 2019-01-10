@@ -4,22 +4,19 @@ import (
 	"github.com/joway/imagic/pkg/constant"
 )
 
+// Engine is the interface of Processor
 type Engine interface {
 	Compress(input []byte, quality int) ([]byte, error)
 	Resize(input []byte, width int, height int) ([]byte, error)
 }
 
+// Processor is the abstract struct of processor
 type Processor struct {
 	Engine
 	Format string
 }
 
-type Option struct {
-	Ratio  float32
-	Width  uint32
-	Height uint32
-}
-
+// NewProcessor return the Processor instance
 func NewProcessor(format string) Engine {
 	var proc = Processor{
 		Format: format,
