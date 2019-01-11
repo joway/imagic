@@ -23,7 +23,7 @@ go get github.com/joway/imagic
 - png
 - jpeg
 
-### Global Options
+### Global Flags
 
 ```shell
 -o, --output string   Output directory
