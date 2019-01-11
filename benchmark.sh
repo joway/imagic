@@ -45,14 +45,14 @@ datasize $IMAGE_DIR
 document "#### Result\n\n"
 
 document "##### Parallel\n"
-benchmark jpg 6 70 $IMAGE_DIR
-benchmark jpg 15 70 $IMAGE_DIR
-benchmark jpg 30 70 $IMAGE_DIR
+benchmark jpg 1 70 $IMAGE_DIR
+benchmark jpg 3 70 $IMAGE_DIR
+benchmark jpg 9 70 $IMAGE_DIR
 
 document "\n\n##### Quality\n"
-benchmark jpg 30 90 $IMAGE_DIR
-benchmark jpg 30 70 $IMAGE_DIR
-benchmark jpg 30 30 $IMAGE_DIR
+benchmark jpg 10 90 $IMAGE_DIR
+benchmark jpg 10 70 $IMAGE_DIR
+benchmark jpg 10 30 $IMAGE_DIR
 
 
 document "\n\n### PNG\n"
@@ -61,11 +61,11 @@ datasize $IMAGE_DIR
 document "#### Result\n\n"
 
 document "##### Parallel\n"
-benchmark png 6 70 $IMAGE_DIR
-benchmark png 15 70 $IMAGE_DIR
-benchmark png 30 70 $IMAGE_DIR
+benchmark png 1 70 $IMAGE_DIR
+benchmark png 3 70 $IMAGE_DIR
+benchmark png 9 70 $IMAGE_DIR
 
 document "\n\n##### Quality\n"
-benchmark png 30 90 $IMAGE_DIR
-benchmark png 30 70 $IMAGE_DIR
-benchmark png 30 30 $IMAGE_DIR
+benchmark png 10 90 $IMAGE_DIR
+benchmark png 10 70 $IMAGE_DIR
+benchmark png 10 30 $IMAGE_DIR
