@@ -11,18 +11,6 @@ func init() {
 		"quality", "q", 70,
 		"Quality of image compression",
 	)
-	compressCmd.Flags().IntVarP(&parallel,
-		"parallel", "p", 4,
-		"Number of parallel tasks",
-	)
-	compressCmd.Flags().StringVarP(&output,
-		"output", "o", "",
-		"Output directory",
-	)
-	compressCmd.Flags().StringVarP(&suffix,
-		"suffix", "s", "",
-		"Suffix of precessed image file",
-	)
 
 	rootCmd.AddCommand(compressCmd)
 }

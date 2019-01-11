@@ -23,13 +23,23 @@ go get github.com/joway/imagic
 - png
 - jpeg
 
-### CLI Options
+### Global Options
 
-```
-imagic -h
+```shell
+-o, --output string   Output directory
+-p, --parallel int    Number of parallel tasks (default 4)
+-s, --suffix string   Suffix of precessed image filename, format: [base_filename][suffix].[ext]
 ```
 
 ### Compress
+
+#### Usage
+
+```
+-q, --quality int     Quality of image compression (default 70)
+```
+
+#### Example
 
 ```shell
 $ imagic compress -q 70 -p 10 \
@@ -39,6 +49,15 @@ $ imagic compress -q 70 -p 10 \
 
 ### Resize
 
+#### Usage
+
+```shell
+-l, --height int   Height of output image, default adaptive
+-w, --width int    Width of output image, default adaptive
+```
+
+#### Example
+
 ```shell
 $ imagic resize -w 320 -p 10 \
 	-s .comp -o ./output \
@@ -46,6 +65,16 @@ $ imagic resize -w 320 -p 10 \
 ```
 
 ### Watermark
+
+#### Usage
+
+```shell
+-x, --X string         Pos X (default "+0")
+-y, --Y string         Pos Y (default "+0")
+-t, --texture string   Texture filename
+```
+
+#### Example
 
 ```shell
 $ imagic watermark -x -600 -y -100 \
