@@ -10,9 +10,9 @@ var output string
 var suffix string
 
 func init() {
-	rootCmd.PersistentFlags().IntVarP(&parallel, "parallel", "p", 4, "number of concurrent tasks")
-	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "", "output directory to write precessed images")
-	rootCmd.PersistentFlags().StringVarP(&suffix, "suffix", "s", "", "suffix of precessed image filename")
+	rootCmd.PersistentFlags().IntVarP(&parallel, "parallel", "p", 4, "Number of concurrent tasks")
+	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "", "Output directory to write precessed images")
+	rootCmd.PersistentFlags().StringVarP(&suffix, "suffix", "s", "", "Suffix of precessed image filename")
 }
 
 var rootCmd = &cobra.Command{

@@ -14,17 +14,17 @@ func init() {
 	watermarkCmd.Flags().StringVarP(
 		&watermarkTextureFn, "texture",
 		"t", "",
-		"texture filename",
+		"Texture filename",
 	)
 	watermarkCmd.Flags().StringVarP(
 		&watermarkXStr, "X",
 		"x", "+0",
-		"pos X",
+		"Pos X",
 	)
 	watermarkCmd.Flags().StringVarP(
 		&watermarkYStr, "Y",
 		"y", "+0",
-		"pos Y",
+		"Pos Y",
 	)
 
 	rootCmd.AddCommand(watermarkCmd)
