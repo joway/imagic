@@ -142,11 +142,11 @@ func getImageFormat(data []byte) (string, error) {
 	if len(data) < 4 {
 		return "", errors.New("Error image format")
 	}
-	bytes := data[:4]
-	if bytes[0] == 0x89 && bytes[1] == 0x50 && bytes[2] == 0x4E && bytes[3] == 0x47 {
+	header := data[:4]
+	if header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 {
 		return constant.FormatPng, nil
 	}
-	if bytes[0] == 0xFF && bytes[1] == 0xD8 {
+	if header[0] == 0xFF && header[1] == 0xD8 {
 		return constant.FormatJpeg, nil
 	}
 	return "", errors.New("Error image format")

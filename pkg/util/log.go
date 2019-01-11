@@ -7,8 +7,13 @@ import (
 )
 
 // LogInfo print info level log
+func LogNail(msg string) {
+	fmt.Printf("%s\r", msg)
+}
+
+// LogInfo print info level log
 func LogInfo(msg string) {
-	color.White(fmt.Sprintf("imagic: %s\n", msg))
+	color.White(fmt.Sprintf("%s\n", msg))
 }
 
 // LogError print error level log
