@@ -32,7 +32,7 @@ imagic -h
 ### Compress
 
 ```shell
-imagic compress -q 70 -p 10 \
+$ imagic compress -q 70 -p 10 \
 	-s .comp -o ./output \
 	./testdata/**/*.png
 ```
@@ -40,7 +40,7 @@ imagic compress -q 70 -p 10 \
 ### Resize
 
 ```shell
-imagic resize -w 320 -p 10 \
+$ imagic resize -w 320 -p 10 \
 	-s .comp -o ./output \
 	./testdata/**/*.jpg
 ```
@@ -48,11 +48,13 @@ imagic resize -w 320 -p 10 \
 ### Watermark
 
 ```shell
-imagic watermark -x -600 -y -100 \
+$ imagic watermark -x -600 -y -100 \
 	-t ./testdata/images/texture.png \
 	-p 10 -o ./output \
 	./testdata/**/*.jpg
 ```
+
+#### X,Y Position:
 
 ![watermark](watermark.png)
 
