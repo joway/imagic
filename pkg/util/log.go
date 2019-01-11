@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// LogInfo print info level log
+// LogNail print nail log
 func LogNail(msg string) {
 	fmt.Printf("%s\r", msg)
 }
