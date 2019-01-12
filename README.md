@@ -8,7 +8,9 @@
 [![codecov](https://codecov.io/gh/joway/imagic/branch/master/graph/badge.svg)](https://codecov.io/gh/joway/imagic)
 [![CircleCI](https://circleci.com/gh/joway/imagic.svg?style=shield)](https://circleci.com/gh/joway/imagic)
 
-An easy and fast tool to process images. [https://github.com/joway/imagic](https://github.com/joway/imagic)
+An easy and fast tool to process images.
+
+[https://github.com/joway/imagic](https://github.com/joway/imagic)
 
 ## Install
 
