@@ -87,6 +87,10 @@ $ imagic watermark -x -600 -y -100 \
 
 ![watermark](watermark.png)
 
+## Who's using Imagic?
+
+[Jallery](https://pho.joway.io)
+
 ## Benchmark
 
 [benchmark.md](docs/benchmark.md)
