@@ -41,7 +41,7 @@ var watermarkCmd = &cobra.Command{
 
 		execCmd(
 			args, "watermark", 0,
-			0, 0, texture, watermarkXStr, watermarkXStr,
+			0, 0, texture, watermarkXStr, watermarkYStr,
 		)
 	},
 }
