@@ -18,6 +18,10 @@ An easy and fast tool to process images.
 go get github.com/joway/imagic
 ```
 
+Or
+
+[Download binary](https://github.com/joway/imagic/releases)
+
 ## Usage
 
 ### Supported format
