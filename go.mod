@@ -2,7 +2,7 @@ module github.com/joway/imagic
 
 require (
 	github.com/disintegration/imaging v1.6.2
-	github.com/fatih/color v1.8.0
+	github.com/fatih/color v1.9.0
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/joway/libimagequant-go v0.1.0
 	github.com/mattn/go-colorable v0.0.9 // indirect
